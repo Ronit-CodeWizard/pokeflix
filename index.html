@@ -10,6 +10,7 @@
 </head>
 <body>
 
+    <!-- Startup Loader -->
     <div id="appLoader">
         <div class="pokeball-spinner">
             <div class="pokeball-top"></div>
@@ -19,8 +20,10 @@
         <h3>Loading Experience...</h3>
     </div>
 
+    <!-- Mobile Overlay -->
     <div class="mobile-menu-overlay" id="mobileOverlay" onclick="toggleMobileMenu()"></div>
 
+    <!-- Navbar -->
     <nav class="navbar" id="navbar">
         <div class="nav-container">
             <div class="nav-left">
@@ -57,6 +60,7 @@
         </div>
     </nav>
 
+    <!-- Mobile Menu -->
     <div class="mobile-nav" id="mobileNav">
         <div class="mobile-header">
             <span>Menu</span>
@@ -71,6 +75,7 @@
         </div>
     </div>
 
+    <!-- Search Popup -->
     <div id="searchResults" class="search-overlay hidden">
         <div class="search-header">
             <h2>Search Results</h2>
@@ -79,6 +84,7 @@
         <div class="search-grid" id="searchGrid"></div>
     </div>
 
+    <!-- Main Content -->
     <div id="appContainer" class="fade-in">
         <header class="hero" id="heroSection">
             <div class="hero-backdrop" id="heroBg"></div>
@@ -107,7 +113,6 @@
                 <div class="row-slider" id="trendingRow"></div>
             </section>
             <section class="row-section" id="moviesSection">
-                <!-- CHANGED TEXT HERE -->
                 <div class="row-header-wrap"><h2 class="row-header">Movies</h2></div>
                 <div class="row-slider" id="moviesRow"></div>
             </section>
@@ -121,6 +126,7 @@
             </section>
         </main>
 
+        <!-- UPDATED FOOTER -->
         <footer class="site-footer">
             <div class="footer-content">
                 <div class="footer-logo">PokéFlix</div>
@@ -128,13 +134,14 @@
                     <a href="#">Privacy</a>
                     <a href="#">Terms & Conditions</a>
                     <a href="#">Suggest</a>
-                    <a href="#">Contact Us</a>
+                    <a href="#">Contact</a>
                 </div>
-                <p class="copyright">© 2025 PokéFlix.</p>
+                <p class="copyright">© 2024 PokéFlix Project. Educational Template.</p>
             </div>
         </footer>
     </div>
 
+    <!-- Details Modal -->
     <div id="detailsModal" class="modal">
         <div class="modal-content details-card slide-up-modal">
             <button class="modal-close-icon" onclick="closeDetailsModal()"><i class="fas fa-times"></i></button>
@@ -170,29 +177,20 @@
         </div>
     </div>
 
-    <!-- NEW GOOGLE-STYLE VIDEO PLAYER MODAL -->
+    <!-- Video Player -->
     <div id="videoModal" class="modal video-modal">
-        <div class="video-container" id="videoContainer">
-            <!-- Header -->
+        <div class="video-container">
             <div class="video-top-bar">
                 <h3 id="playingTitle">Now Playing</h3>
                 <button onclick="closeVideo()"><i class="fas fa-times"></i></button>
             </div>
-            
-            <!-- YouTube Fallback -->
             <iframe id="videoIframe" src="" allow="autoplay; encrypted-media" allowfullscreen class="hidden"></iframe>
-
-            <!-- Custom HTML5 Player -->
             <div id="customPlayer" class="custom-player hidden">
                 <video id="mainVideo" oncontextmenu="return false;" onclick="togglePlay()"></video>
-                
                 <div class="video-controls">
                     <div class="progress-area" onclick="seek(event)">
-                        <div class="progress-bar">
-                            <div class="progress-fill" id="progressFill"></div>
-                        </div>
+                        <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
                     </div>
-                    
                     <div class="controls-row">
                         <div class="controls-left">
                             <button onclick="skip(-10)"><i class="fas fa-rotate-left"></i> 10s</button>
@@ -205,35 +203,41 @@
                         </div>
                     </div>
                 </div>
-                
-                <!-- Loading Spinner for Video -->
                 <div class="video-loader" id="videoLoader"><div class="spinner"></div></div>
             </div>
         </div>
     </div>
 
+    <!-- Admin Panel -->
     <div id="adminModal" class="modal">
         <div class="modal-content admin-panel slide-up-modal">
             <div class="admin-header">
                 <h2><i class="fas fa-user-shield"></i> Admin Dashboard</h2>
-                <button onclick="toggleAdminPanel()"><i class="fas fa-times"></i></button>
+                <!-- Fixed Close Button (Transparent) -->
+                <button onclick="toggleAdminPanel()" class="admin-close-btn"><i class="fas fa-times"></i></button>
             </div>
+            
             <div id="adminAuth">
                 <div class="auth-box">
                     <p>Enter Administrator Passcode</p>
                     <input type="password" id="adminPass" placeholder="••••••">
                     <button onclick="checkAdmin()" class="btn-primary full-width">Unlock</button>
-                    <!-- UPDATED HINT -->
                     <p class="hint">Hint: pass456</p>
                 </div>
             </div>
+
             <div id="adminContent" class="hidden">
                 <div class="admin-tabs">
-                    <button class="tab-btn active" onclick="setAdminTab('add')">Add Show</button>
+                    <button class="tab-btn active" onclick="setAdminTab('add')">Add/Edit</button>
                     <button class="tab-btn" onclick="setAdminTab('ep')">Add Episode</button>
+                    <button class="tab-btn" onclick="setAdminTab('manage')">Manage List</button>
                     <button class="tab-btn danger" onclick="resetData()">Reset DB</button>
                 </div>
+
+                <!-- Add/Edit Tab -->
                 <div id="tabAdd" class="tab-content">
+                    <h3 id="formTitle" style="color:var(--accent); margin-bottom:15px; font-size:1rem;">Add New Content</h3>
+                    <input type="hidden" id="editId">
                     <div class="form-group"><label>Title</label><input type="text" id="newTitle"></div>
                     <div class="form-row">
                         <div class="form-group"><label>Category</label><select id="newCategory"><option value="Movies">Movie</option><option value="Series">Series</option><option value="Horizons">Horizons</option></select></div>
@@ -242,14 +246,30 @@
                     <div class="form-group"><label>Poster URL</label><input type="text" id="newImg"></div>
                     <div class="form-group"><label>Backdrop URL</label><input type="text" id="newBackdrop"></div>
                     <div class="form-group"><label>Description</label><textarea id="newDesc" rows="3"></textarea></div>
-                    <div class="form-group"><label>Video URL (Direct MP4 or YouTube)</label><input type="text" id="newVideo"></div>
-                    <button onclick="addNewContent()" class="btn-primary full-width">Add Content</button>
+                    <div class="form-group"><label>Video URL (Movies)</label><input type="text" id="newVideo"></div>
+                    
+                    <div class="form-row">
+                        <button onclick="saveContent()" class="btn-primary full-width" id="saveBtn">Save Content</button>
+                        <button onclick="cancelEdit()" class="btn-secondary full-width hidden" id="cancelBtn" style="background:#333;">Cancel</button>
+                    </div>
+
+                    <!-- NEW: Manage Episodes Container (Visible when editing series) -->
+                    <div id="editEpisodeContainer" class="hidden" style="margin-top:20px; border-top:1px solid #333; padding-top:15px;">
+                        <h4 style="color:#ddd; margin-bottom:10px;">Manage Episodes</h4>
+                        <div id="adminEpisodeList" class="manage-list-container" style="max-height: 200px;"></div>
+                    </div>
                 </div>
+
                 <div id="tabEp" class="tab-content hidden">
                     <div class="form-group"><label>Select Series</label><select id="seasonSelect"></select></div>
                     <div class="form-group"><label>Episode Title</label><input type="text" id="epTitle"></div>
                     <div class="form-group"><label>Video URL</label><input type="text" id="epVideo"></div>
                     <button onclick="addEpisode()" class="btn-primary full-width">Add Episode</button>
+                </div>
+
+                <div id="tabManage" class="tab-content hidden">
+                    <div class="form-group"><input type="text" id="manageSearch" placeholder="Search..." onkeyup="renderManageList()"></div>
+                    <div id="manageList" class="manage-list-container"></div>
                 </div>
             </div>
         </div>
