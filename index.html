@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>PokéFlix | Premium Stream</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div id="appLoader">
+        <div class="pokeball-spinner">
+            <div class="pokeball-top"></div>
+            <div class="pokeball-bottom"></div>
+            <div class="pokeball-center"></div>
+        </div>
+        <h3>Loading Experience...</h3>
+    </div>
+
+    <div class="mobile-menu-overlay" id="mobileOverlay" onclick="toggleMobileMenu()"></div>
+
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="nav-left">
+                <div class="logo" id="mainLogo" onclick="triggerCatchAnimation()">
+                    <div class="pokeball-container">
+                        <div class="pokeball-icon" id="pokeIcon"></div>
+                        <div class="stars-container" id="starsContainer"></div>
+                    </div>
+                    <span>Poké<span class="highlight">Flix</span></span>
+                </div>
+                <div class="nav-links desktop-only">
+                    <a href="#" class="active" onclick="filterHome()">Home</a>
+                    <a href="#" onclick="scrollToSection('moviesRow')">Movies</a>
+                    <a href="#" onclick="scrollToSection('seriesRow')">Series</a>
+                    <a href="#" onclick="scrollToSection('myListRow')">My List</a>
+                </div>
+            </div>
+            <div class="nav-right">
+                <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="searchInput" placeholder="Search titles..." onkeyup="handleSearch()">
+                </div>
+                <div class="user-actions">
+                    <button class="icon-btn tooltip" onclick="toggleAdminPanel()" title="Admin Panel">
+                        <i class="fas fa-user-astronaut"></i>
+                    </button>
+                    <button class="hamburger mobile-only" onclick="toggleMobileMenu()">
+                        <div class="bar"></div>
+                        <div class="bar"></div>
+                        <div class="bar"></div>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="mobile-nav" id="mobileNav">
+        <div class="mobile-header">
+            <span>Menu</span>
+            <button onclick="toggleMobileMenu()"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="mobile-links">
+            <a href="#" onclick="filterHome()"><i class="fas fa-home"></i> Home</a>
+            <a href="#" onclick="scrollToSection('moviesRow')"><i class="fas fa-film"></i> Movies</a>
+            <a href="#" onclick="scrollToSection('seriesRow')"><i class="fas fa-tv"></i> Series</a>
+            <a href="#" onclick="scrollToSection('myListRow')"><i class="fas fa-plus-circle"></i> My List</a>
+            <a href="#" onclick="toggleAdminPanel()"><i class="fas fa-cogs"></i> Admin</a>
+        </div>
+    </div>
+
+    <div id="searchResults" class="search-overlay hidden">
+        <div class="search-header">
+            <h2>Search Results</h2>
+            <button onclick="closeSearch()"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="search-grid" id="searchGrid"></div>
+    </div>
+
+    <div id="appContainer" class="fade-in">
+        <header class="hero" id="heroSection">
+            <div class="hero-backdrop" id="heroBg"></div>
+            <div class="hero-gradient-v"></div>
+            <div class="hero-gradient-h"></div>
+            <div class="hero-content">
+                <div class="hero-tags" id="heroTags"></div>
+                <h1 id="heroTitle" class="slide-up">Loading...</h1>
+                <p id="heroDesc" class="slide-up delay-1">Please wait...</p>
+                <div class="hero-btns slide-up delay-2">
+                    <button class="btn-primary" id="heroPlayBtn"><i class="fas fa-play"></i> Play Now</button>
+                    <button class="btn-secondary" id="heroInfoBtn"><i class="fas fa-info-circle"></i> More Info</button>
+                </div>
+            </div>
+            <button class="slider-arrow prev" onclick="changeSlide(-1)"><i class="fas fa-chevron-left"></i></button>
+            <button class="slider-arrow next" onclick="changeSlide(1)"><i class="fas fa-chevron-right"></i></button>
+        </header>
+
+        <main class="rows-container">
+            <section class="row-section hidden" id="myListSection">
+                <div class="row-header-wrap"><h2 class="row-header">My List</h2></div>
+                <div class="row-slider" id="myListRow"></div>
+            </section>
+            <section class="row-section">
+                <div class="row-header-wrap"><h2 class="row-header">Trending Now</h2></div>
+                <div class="row-slider" id="trendingRow"></div>
+            </section>
+            <section class="row-section" id="moviesSection">
+                <!-- CHANGED TEXT HERE -->
+                <div class="row-header-wrap"><h2 class="row-header">Movies</h2></div>
+                <div class="row-slider" id="moviesRow"></div>
+            </section>
+            <section class="row-section" id="seriesSection">
+                <div class="row-header-wrap"><h2 class="row-header">Series & Seasons</h2></div>
+                <div class="row-slider" id="seriesRow"></div>
+            </section>
+            <section class="row-section" id="horizonsSection">
+                <div class="row-header-wrap"><h2 class="row-header">Pokémon Horizons</h2></div>
+                <div class="row-slider" id="horizonsRow"></div>
+            </section>
+        </main>
+
+        <footer class="site-footer">
+            <div class="footer-content">
+                <div class="footer-logo">PokéFlix</div>
+                <div class="footer-links">
+                    <a href="#">Privacy</a>
+                    <a href="#">Terms & Conditions</a>
+                    <a href="#">Suggest</a>
+                    <a href="#">Contact Us</a>
+                </div>
+                <p class="copyright">© 2025 PokéFlix.</p>
+            </div>
+        </footer>
+    </div>
+
+    <div id="detailsModal" class="modal">
+        <div class="modal-content details-card slide-up-modal">
+            <button class="modal-close-icon" onclick="closeDetailsModal()"><i class="fas fa-times"></i></button>
+            <div class="details-banner">
+                <img id="detailBackdrop" src="" alt="">
+                <div class="details-shade"></div>
+                <div class="details-title-block">
+                    <h2 id="detailTitle">Title</h2>
+                    <div class="details-actions">
+                        <button id="detailPlayMain" class="btn-primary"><i class="fas fa-play"></i> Play</button>
+                        <button id="detailListBtn" class="btn-circle"><i class="fas fa-plus"></i></button>
+                    </div>
+                </div>
+            </div>
+            <div class="details-body">
+                <div class="details-info">
+                    <div class="meta-row">
+                        <span class="match-score">98% Match</span>
+                        <span id="detailYear">2023</span>
+                        <span class="age-rating">7+</span>
+                        <span id="detailCat">Series</span>
+                    </div>
+                    <p id="detailDesc">Description goes here...</p>
+                </div>
+                <div class="episodes-container" id="episodesContainer">
+                    <div class="episodes-header">
+                        <h3>Episodes</h3>
+                        <span id="epCount">0 Episodes</span>
+                    </div>
+                    <div id="episodeList" class="episode-list"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- NEW GOOGLE-STYLE VIDEO PLAYER MODAL -->
+    <div id="videoModal" class="modal video-modal">
+        <div class="video-container" id="videoContainer">
+            <!-- Header -->
+            <div class="video-top-bar">
+                <h3 id="playingTitle">Now Playing</h3>
+                <button onclick="closeVideo()"><i class="fas fa-times"></i></button>
+            </div>
+            
+            <!-- YouTube Fallback -->
+            <iframe id="videoIframe" src="" allow="autoplay; encrypted-media" allowfullscreen class="hidden"></iframe>
+
+            <!-- Custom HTML5 Player -->
+            <div id="customPlayer" class="custom-player hidden">
+                <video id="mainVideo" oncontextmenu="return false;" onclick="togglePlay()"></video>
+                
+                <div class="video-controls">
+                    <div class="progress-area" onclick="seek(event)">
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="progressFill"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="controls-row">
+                        <div class="controls-left">
+                            <button onclick="skip(-10)"><i class="fas fa-rotate-left"></i> 10s</button>
+                            <button onclick="togglePlay()" id="playPauseBtn"><i class="fas fa-play"></i></button>
+                            <button onclick="skip(10)"><i class="fas fa-rotate-right"></i> 10s</button>
+                            <span class="time-display" id="timeDisplay">00:00 / 00:00</span>
+                        </div>
+                        <div class="controls-right">
+                            <button onclick="toggleFullscreen()"><i class="fas fa-expand"></i></button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Loading Spinner for Video -->
+                <div class="video-loader" id="videoLoader"><div class="spinner"></div></div>
+            </div>
+        </div>
+    </div>
+
+    <div id="adminModal" class="modal">
+        <div class="modal-content admin-panel slide-up-modal">
+            <div class="admin-header">
+                <h2><i class="fas fa-user-shield"></i> Admin Dashboard</h2>
+                <button onclick="toggleAdminPanel()"><i class="fas fa-times"></i></button>
+            </div>
+            <div id="adminAuth">
+                <div class="auth-box">
+                    <p>Enter Administrator Passcode</p>
+                    <input type="password" id="adminPass" placeholder="••••••">
+                    <button onclick="checkAdmin()" class="btn-primary full-width">Unlock</button>
+                    <!-- UPDATED HINT -->
+                    <p class="hint">Hint: pass456</p>
+                </div>
+            </div>
+            <div id="adminContent" class="hidden">
+                <div class="admin-tabs">
+                    <button class="tab-btn active" onclick="setAdminTab('add')">Add Show</button>
+                    <button class="tab-btn" onclick="setAdminTab('ep')">Add Episode</button>
+                    <button class="tab-btn danger" onclick="resetData()">Reset DB</button>
+                </div>
+                <div id="tabAdd" class="tab-content">
+                    <div class="form-group"><label>Title</label><input type="text" id="newTitle"></div>
+                    <div class="form-row">
+                        <div class="form-group"><label>Category</label><select id="newCategory"><option value="Movies">Movie</option><option value="Series">Series</option><option value="Horizons">Horizons</option></select></div>
+                        <div class="form-group"><label>Year</label><input type="number" id="newYear" value="2024"></div>
+                    </div>
+                    <div class="form-group"><label>Poster URL</label><input type="text" id="newImg"></div>
+                    <div class="form-group"><label>Backdrop URL</label><input type="text" id="newBackdrop"></div>
+                    <div class="form-group"><label>Description</label><textarea id="newDesc" rows="3"></textarea></div>
+                    <div class="form-group"><label>Video URL (Direct MP4 or YouTube)</label><input type="text" id="newVideo"></div>
+                    <button onclick="addNewContent()" class="btn-primary full-width">Add Content</button>
+                </div>
+                <div id="tabEp" class="tab-content hidden">
+                    <div class="form-group"><label>Select Series</label><select id="seasonSelect"></select></div>
+                    <div class="form-group"><label>Episode Title</label><input type="text" id="epTitle"></div>
+                    <div class="form-group"><label>Video URL</label><input type="text" id="epVideo"></div>
+                    <button onclick="addEpisode()" class="btn-primary full-width">Add Episode</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
