@@ -1,11 +1,38 @@
 // ==========================================
-// 1. DATABASE
+// 1. DATABASE (With Corrected Image)
 // ==========================================
 const defaultDB = [
-    { id: 101, title: "Pokémon: The First Movie", year: 1998, desc: "Ash and friends face Mewtwo.", category: "Movies", image: "https://m.media-amazon.com/images/M/MV5BMjI2MjM2OTYwNl5BMl5BanBnXkFtZTgwNTU0NjQzMzE@._V1_FMjpg_UX1000_.jpg", backdrop: "https://images7.alphacoders.com/609/609070.jpg", video: "https://www.youtube.com/embed/5KCvXp_Xf7o", episodes: [] },
-    { id: 102, title: "Detective Pikachu", year: 2019, desc: "A boy and Pikachu solve a mystery.", category: "Movies", image: "https://m.media-amazon.com/images/M/MV5BNDU4Mzc3NzE5Nl5BMl5BanBnXkFtZTgwMzE1NzI1NzM@._V1_.jpg", backdrop: "https://images6.alphacoders.com/101/1012879.jpg", video: "https://www.youtube.com/embed/1roy4o4tqQM", episodes: [] },
-    { id: 201, title: "Indigo League", year: 1997, desc: "Ash starts his journey.", category: "Series", image: "https://i.supaimg.com/aade1484-5a34-4ac3-9263-8b9a8c3a26e7.jpg", backdrop: "https://images.alphacoders.com/654/654637.jpg", episodes: [{ title: "I Choose You!", time: "22m", url: "https://www.youtube.com/embed/D_trkiE4eW8" }, { title: "Pokémon Emergency", time: "22m", url: "https://www.youtube.com/embed/uBYORdr_TY8" }] },
-    { id: 301, title: "Pokémon Horizons", year: 2023, desc: "A new adventure with Liko.", category: "Horizons", image: "https://pbs.twimg.com/media/F_tY3j_XoAA2d9u.jpg:large", backdrop: "https://images.alphacoders.com/133/1330957.png", episodes: [{ title: "The Pendant", time: "24m", url: "https://www.youtube.com/embed/uBYORdr_TY8" }] }
+    {
+        id: 101, title: "Pokémon: The First Movie", year: 1998, desc: "Ash and friends face Mewtwo.", category: "Movies", 
+        image: "https://m.media-amazon.com/images/M/MV5BMjI2MjM2OTYwNl5BMl5BanBnXkFtZTgwNTU0NjQzMzE@._V1_FMjpg_UX1000_.jpg", 
+        backdrop: "https://images7.alphacoders.com/609/609070.jpg", video: "https://www.youtube.com/embed/5KCvXp_Xf7o", episodes: []
+    },
+    {
+        id: 102, title: "Detective Pikachu", year: 2019, desc: "A boy and Pikachu solve a mystery.", category: "Movies", 
+        image: "https://m.media-amazon.com/images/M/MV5BNDU4Mzc3NzE5Nl5BMl5BanBnXkFtZTgwMzE1NzI1NzM@._V1_.jpg", 
+        backdrop: "https://images6.alphacoders.com/101/1012879.jpg", video: "https://www.youtube.com/embed/1roy4o4tqQM", episodes: []
+    },
+    {
+        id: 103, title: "Lucario and the Mystery of Mew", year: 2005, desc: "Ash helps a Lucario.", category: "Movies", 
+        image: "https://m.media-amazon.com/images/M/MV5BMTI2N2M2NDQtZDFkZS00MjQ4LWE5NjktYzY0M2E4MTM2MzY2XkEyXkFqcGdeQXVyNjExODE1MDc@._V1_.jpg", 
+        backdrop: "https://images5.alphacoders.com/131/1318042.jpeg", video: "https://www.youtube.com/embed/D_trkiE4eW8", episodes: []
+    },
+    {
+        id: 201, title: "Indigo League", year: 1997, desc: "Ash starts his journey.", category: "Series", 
+        image: "https://i.supaimg.com/aade1484-5a34-4ac3-9263-8b9a8c3a26e7.jpg", // CORRECTED
+        backdrop: "https://images.alphacoders.com/654/654637.jpg", 
+        episodes: [{ title: "I Choose You!", time: "22m", url: "https://www.youtube.com/embed/D_trkiE4eW8" }, { title: "Pokémon Emergency", time: "22m", url: "https://www.youtube.com/embed/uBYORdr_TY8" }]
+    },
+    {
+        id: 202, title: "Pokémon XYZ", year: 2015, desc: "Ash explores Kalos.", category: "Series", 
+        image: "https://m.media-amazon.com/images/M/MV5BNDc2MzY5MzQzNV5BMl5BanBnXkFtZTgwNjA3OTY2NzE@._V1_.jpg", 
+        backdrop: "https://images2.alphacoders.com/723/723970.png", episodes: [{ title: "From A to Z!", time: "24m", url: "https://www.youtube.com/embed/uBYORdr_TY8" }]
+    },
+    {
+        id: 301, title: "Pokémon Horizons", year: 2023, desc: "Liko and Roy adventure.", category: "Horizons", 
+        image: "https://pbs.twimg.com/media/F_tY3j_XoAA2d9u.jpg:large", 
+        backdrop: "https://images.alphacoders.com/133/1330957.png", episodes: [{ title: "The Pendant", time: "24m", url: "https://www.youtube.com/embed/uBYORdr_TY8" }]
+    }
 ];
 
 let db = JSON.parse(localStorage.getItem('pokeFlixDB')) || defaultDB;
@@ -41,7 +68,7 @@ function updateHero(item) {
     }, 400);
 }
 
-// Logo Animation
+// Logo Animation (Shake -> Success)
 function triggerCatchAnimation() {
     const icon = document.getElementById('pokeIcon'); const container = document.getElementById('starsContainer');
     if(icon.classList.contains('catching')) return;
@@ -49,10 +76,7 @@ function triggerCatchAnimation() {
     setTimeout(() => {
         icon.classList.remove('catching'); icon.classList.add('success');
         container.innerHTML = '';
-        for(let i=0; i<3; i++) {
-            const s = document.createElement('i'); s.className = `fas fa-star catch-star ${i==0?'star-left':i==1?'star-mid':'star-right'}`;
-            container.appendChild(s);
-        }
+        for(let i=0; i<3; i++) { const s = document.createElement('i'); s.className = `fas fa-star catch-star ${i==0?'star-left':i==1?'star-mid':'star-right'}`; container.appendChild(s); }
         setTimeout(() => { icon.classList.remove('success'); container.innerHTML = ''; }, 1500);
     }, 1500);
 }
@@ -106,7 +130,7 @@ function updateListBtn(id) {
 }
 function saveList() { localStorage.setItem('pokeFlixList', JSON.stringify(myList)); }
 
-// Video Player Logic (Hybrid: Iframe or Custom)
+// Video Player
 const videoPlayer = document.getElementById('mainVideo');
 const videoIframe = document.getElementById('videoIframe');
 const customPlayer = document.getElementById('customPlayer');
@@ -116,62 +140,24 @@ function openVideo(url, title) {
     document.getElementById('playingTitle').innerText = title;
     document.getElementById('videoModal').style.display = 'flex';
     closeDetailsModal();
-
-    // Check if YouTube
     if(url.includes('youtube') || url.includes('youtu.be')) {
         let embedUrl = url.includes('watch?v=') ? url.replace('watch?v=', 'embed/') : url;
         if(!embedUrl.includes('autoplay')) embedUrl += "?autoplay=1";
-        videoIframe.src = embedUrl;
-        videoIframe.classList.remove('hidden');
-        customPlayer.classList.add('hidden');
-        videoPlayer.pause();
+        videoIframe.src = embedUrl; videoIframe.classList.remove('hidden'); customPlayer.classList.add('hidden'); videoPlayer.pause();
     } else {
-        // Direct Video File (MP4/WebM) -> Use Custom Player
-        videoIframe.classList.add('hidden');
-        videoIframe.src = "";
-        customPlayer.classList.remove('hidden');
-        videoPlayer.src = url;
-        videoPlayer.play();
-        updatePlayIcon();
+        videoIframe.classList.add('hidden'); videoIframe.src = ""; customPlayer.classList.remove('hidden'); videoPlayer.src = url; videoPlayer.play();
     }
 }
-
-function closeVideo() {
-    videoPlayer.pause();
-    videoPlayer.src = "";
-    videoIframe.src = "";
-    document.getElementById('videoModal').style.display = 'none';
-}
-
-// Custom Player Controls
-function togglePlay() {
-    if(videoPlayer.paused) videoPlayer.play(); else videoPlayer.pause();
-    updatePlayIcon();
-}
-function updatePlayIcon() {
-    const icon = document.querySelector('#playPauseBtn i');
-    icon.className = videoPlayer.paused ? 'fas fa-play' : 'fas fa-pause';
-}
+function closeVideo() { videoPlayer.pause(); videoPlayer.src = ""; videoIframe.src = ""; document.getElementById('videoModal').style.display = 'none'; }
+function togglePlay() { if(videoPlayer.paused) videoPlayer.play(); else videoPlayer.pause(); }
 function skip(sec) { videoPlayer.currentTime += sec; }
-function seek(e) {
-    const rect = e.target.closest('.progress-area').getBoundingClientRect();
-    const percent = (e.clientX - rect.left) / rect.width;
-    videoPlayer.currentTime = percent * videoPlayer.duration;
-}
-function toggleFullscreen() {
-    if(!document.fullscreenElement) document.getElementById('customPlayer').requestFullscreen();
-    else document.exitFullscreen();
-}
+function seek(e) { const r = e.target.closest('.progress-area').getBoundingClientRect(); videoPlayer.currentTime = ((e.clientX - r.left)/r.width) * videoPlayer.duration; }
+function toggleFullscreen() { if(!document.fullscreenElement) document.getElementById('customPlayer').requestFullscreen(); else document.exitFullscreen(); }
 videoPlayer.ontimeupdate = () => {
-    const pct = (videoPlayer.currentTime / videoPlayer.duration) * 100;
-    document.getElementById('progressFill').style.width = `${pct}%`;
-    let cur = Math.floor(videoPlayer.currentTime), dur = Math.floor(videoPlayer.duration || 0);
-    document.getElementById('timeDisplay').innerText = `${formatTime(cur)} / ${formatTime(dur)}`;
+    document.getElementById('progressFill').style.width = `${(videoPlayer.currentTime/videoPlayer.duration)*100}%`;
+    let cur = Math.floor(videoPlayer.currentTime), dur = Math.floor(videoPlayer.duration||0);
+    document.getElementById('timeDisplay').innerText = `${Math.floor(cur/60)}:${cur%60<10?'0':''}${cur%60} / ${Math.floor(dur/60)}:${dur%60<10?'0':''}${dur%60}`;
 };
-function formatTime(s) {
-    let m = Math.floor(s/60), sec = s%60;
-    return `${m}:${sec<10?'0':''}${sec}`;
-}
 
 // Search
 function handleSearch() {
@@ -192,24 +178,80 @@ function closeSearch() { document.getElementById('searchResults').classList.add(
 // Admin
 function toggleAdminPanel() {
     const modal = document.getElementById('adminModal'); modal.style.display = modal.style.display === 'block' ? 'none' : 'block';
-    if(localStorage.getItem('adminUnlocked') === 'true') { document.getElementById('adminAuth').classList.add('hidden'); document.getElementById('adminContent').classList.remove('hidden'); populateAdminSelect(); }
+    if(localStorage.getItem('adminUnlocked') === 'true') { document.getElementById('adminAuth').classList.add('hidden'); document.getElementById('adminContent').classList.remove('hidden'); populateAdminSelect(); renderManageList(); }
 }
 function checkAdmin() {
-    // UPDATED PASSWORD CHECK
     if(document.getElementById('adminPass').value === 'ronny1639') {
-        localStorage.setItem('adminUnlocked', 'true'); document.getElementById('adminAuth').classList.add('hidden'); document.getElementById('adminContent').classList.remove('hidden'); populateAdminSelect();
+        localStorage.setItem('adminUnlocked', 'true'); document.getElementById('adminAuth').classList.add('hidden'); document.getElementById('adminContent').classList.remove('hidden'); populateAdminSelect(); renderManageList();
     } else { alert('Access Denied'); }
 }
 function setAdminTab(tab) {
     document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active')); document.querySelectorAll('.tab-content').forEach(c => c.classList.add('hidden'));
-    if(tab === 'add') { document.getElementById('tabAdd').classList.remove('hidden'); event.target.classList.add('active'); }
-    else if(tab === 'ep') { document.getElementById('tabEp').classList.remove('hidden'); event.target.classList.add('active'); }
+    if(tab === 'add') { document.getElementById('tabAdd').classList.remove('hidden'); event.target.classList.add('active'); cancelEdit(); }
+    else if(tab === 'ep') { document.getElementById('tabEp').classList.remove('hidden'); event.target.classList.add('active'); populateAdminSelect(); }
+    else if(tab === 'manage') { document.getElementById('tabManage').classList.remove('hidden'); event.target.classList.add('active'); renderManageList(); }
 }
-function addNewContent() {
+function saveContent() {
+    const id = document.getElementById('editId').value;
     const title = document.getElementById('newTitle').value; const img = document.getElementById('newImg').value;
     if(!title || !img) { alert('Info missing'); return; }
-    db.unshift({ id: Date.now(), title, category: document.getElementById('newCategory').value, year: document.getElementById('newYear').value, image: img, backdrop: document.getElementById('newBackdrop').value, desc: document.getElementById('newDesc').value, video: document.getElementById('newVideo').value, episodes: [] });
-    localStorage.setItem('pokeFlixDB', JSON.stringify(db)); renderContent(); alert('Added!'); toggleAdminPanel();
+    const obj = { title, category: document.getElementById('newCategory').value, year: document.getElementById('newYear').value, image: img, backdrop: document.getElementById('newBackdrop').value, desc: document.getElementById('newDesc').value, video: document.getElementById('newVideo').value };
+    if(id) { const idx = db.findIndex(i=>i.id==id); if(idx>-1) db[idx] = { ...db[idx], ...obj }; alert('Updated'); }
+    else { db.unshift({ id: Date.now(), ...obj, episodes: [] }); alert('Added'); }
+    localStorage.setItem('pokeFlixDB', JSON.stringify(db)); renderContent(); cancelEdit();
+}
+function editContent(id) {
+    const item = db.find(x => x.id === id); if(!item) return;
+    setAdminTab('add');
+    document.getElementById('editId').value = item.id;
+    document.getElementById('newTitle').value = item.title;
+    document.getElementById('newCategory').value = item.category;
+    document.getElementById('newImg').value = item.image;
+    document.getElementById('newBackdrop').value = item.backdrop;
+    document.getElementById('newYear').value = item.year;
+    document.getElementById('newDesc').value = item.desc;
+    document.getElementById('newVideo').value = item.video;
+    
+    // Episode Edit
+    const epCont = document.getElementById('editEpisodeContainer');
+    const epList = document.getElementById('adminEpisodeList');
+    epCont.classList.add('hidden');
+    if(item.category !== 'Movies' && item.episodes.length > 0) {
+        epCont.classList.remove('hidden'); epList.innerHTML = '';
+        item.episodes.forEach((ep, idx) => {
+            const d = document.createElement('div'); d.className = 'manage-item';
+            d.innerHTML = `<span style="color:#ddd">${idx+1}. ${ep.title}</span><div><button class="btn-edit" onclick="editEpisode(${item.id}, ${idx})">Edit</button> <button class="btn-delete" onclick="deleteEpisode(${item.id}, ${idx})">Del</button></div>`;
+            epList.appendChild(d);
+        });
+    }
+    document.getElementById('saveBtn').innerText = "Update Content"; document.getElementById('cancelBtn').classList.remove('hidden');
+}
+function cancelEdit() {
+    document.getElementById('editId').value = ""; document.getElementById('newTitle').value = ""; document.getElementById('newImg').value = ""; document.getElementById('newBackdrop').value = ""; document.getElementById('newDesc').value = ""; document.getElementById('newVideo').value = "";
+    document.getElementById('saveBtn').innerText = "Add Content"; document.getElementById('cancelBtn').classList.add('hidden'); document.getElementById('editEpisodeContainer').classList.add('hidden');
+}
+function deleteContent(id) {
+    if(confirm('Delete?')) { db = db.filter(i=>i.id!==id); myList = myList.filter(x=>x!==id); localStorage.setItem('pokeFlixDB', JSON.stringify(db)); localStorage.setItem('pokeFlixList', JSON.stringify(myList)); renderContent(); renderManageList(); }
+}
+function deleteEpisode(sId, epIdx) {
+    const s = db.find(i=>i.id===sId);
+    if(s && confirm('Delete Episode?')) { s.episodes.splice(epIdx, 1); localStorage.setItem('pokeFlixDB', JSON.stringify(db)); editContent(sId); }
+}
+function editEpisode(sId, epIdx) {
+    const s = db.find(i=>i.id===sId);
+    if(s) {
+        const ep = s.episodes[epIdx]; const newTitle = prompt("New Title:", ep.title); const newUrl = prompt("New URL:", ep.url);
+        if(newTitle && newUrl) { ep.title = newTitle; ep.url = newUrl; localStorage.setItem('pokeFlixDB', JSON.stringify(db)); editContent(sId); }
+    }
+}
+function renderManageList() {
+    const list = document.getElementById('manageList'); const q = document.getElementById('manageSearch').value.toLowerCase(); list.innerHTML = '';
+    const res = db.filter(i=>i.title.toLowerCase().includes(q));
+    res.forEach(i => {
+        const d = document.createElement('div'); d.className = 'manage-item';
+        d.innerHTML = `<div class="manage-info"><img src="${i.image}"><div><h4>${i.title}</h4><span>${i.category}</span></div></div><div class="manage-actions"><button class="btn-edit" onclick="editContent(${i.id})">Edit</button><button class="btn-delete" onclick="deleteContent(${i.id})">Del</button></div>`;
+        list.appendChild(d);
+    });
 }
 function populateAdminSelect() {
     const sel = document.getElementById('seasonSelect'); sel.innerHTML = '';
