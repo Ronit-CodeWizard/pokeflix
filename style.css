@@ -314,7 +314,7 @@ body {
    ========================================= */
 .rows-container { 
     position: relative; z-index: 20; padding-bottom: 40px; 
-    margin-top: -80px; /* Pull up into the black fade */
+    margin-top: -60px; /* Pull up into the black fade */
 }
 .row-section { padding: 0 4%; margin-bottom: 60px; }
 .row-header { 
